@@ -29,8 +29,8 @@ RED    = PIN 8 - Button data <br />
 Display shows **37.5C** - How does that translates into the bitstream??  
 
 Maybe BCD to 7 segment shift registers where:<br />
-7 = 01110000 = 0x70!<br />
-3 = 11110010 <br />
+7 = 1110000(0)  = 0x70!<br />
+3 = 11110010(0) = <br />
 ### Conclusion
 - The clock is pulsing 7 times for each byte - really strange behaviour, why not 8 !! <br />
 - Totaly of 6 bytes in each cycle <br />
@@ -41,3 +41,4 @@ Maybe BCD to 7 segment shift registers where:<br />
 ### references
 - https://github.com/NickB1/OpenSpa/blob/master/documents/Balboa/Balboa_Display_Measurements.pdf
 - https://www.olivierhill.ca/archives/72-The-Internet-of-Spas.html
+- https://create.arduino.cc/projecthub/meljr/7-segment-led-displays-102-using-a-shift-register-6b6976
