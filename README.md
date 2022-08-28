@@ -29,7 +29,7 @@ Display *37.5C*
 
 ### Conclusion
 - The clock is pulsing 7 times for each byte  <br />
-- Totaly of 5 (maybe 6 bytes!) <br />
+- Totaly of 6 bytes!) <br />
 - Each cycle is repeted every 20 ms <br />
 - Bit duration of the clock is 10 microseconds <br />
 
