@@ -28,7 +28,7 @@ RED    = PIN 8 - Button data <br />
 Display shows *37.5C* - How does that translates into the bitstream??  
 
 ### Conclusion
-- The clock is pulsing 7 times for each byte  <br />
+- The clock is pulsing 7 times for each byte - really strange behaviour!! <br />
 - Totaly of 6 bytes in each cycle <br />
 - Each cycle is repeted every 20 ms <br />
 - One cycle duration 1.88 ms
