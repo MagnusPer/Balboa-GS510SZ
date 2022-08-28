@@ -24,3 +24,9 @@ RED    = PIN 8 - Button data <br />
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/PIN6-PIN5-PIN8.JPG" width="400">
  
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/Complete%20Sequence.JPG" width="1000">
+
+### Conclusion
+- The clock is pulsing 7 times for each byte  <br />
+- Totaly of 5 (maybe 6 bytes!) <br />
+- Each cycle is repeted every 20 ms <br />
+- Bit duration of the clock is 10 microseconds <br />
