@@ -14,7 +14,12 @@
 | PIN 8         | Serial Tx       |  Buttons data |
 
 ## Measurenments 
-<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/PIN6-PIN5-PIN8.JPG" width="800">
+
+<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/TEK0001.JPG" width="600">
+
+<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/PIN6-PIN5-PIN8.JPG" width="600">
 Yellow = PIN 6 - CLK
 GREEN  = PIN 5 - Display data  
 RED    = PIN 8 - Button data 
+
+
