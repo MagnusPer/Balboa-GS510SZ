@@ -28,6 +28,8 @@ RED    = PIN 8 - Button data <br />
 
 Display shows **37.5C** - How does that translates into the bitstream??  
 
+Maybe BCD to 7 segment shift registers where 7 = 01110000 = 0x70!
+
 ### Conclusion
 - The clock is pulsing 7 times for each byte - really strange behaviour, why not 8 !! <br />
 - Totaly of 6 bytes in each cycle <br />
