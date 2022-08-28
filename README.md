@@ -15,7 +15,7 @@
 
 ## Measurenments 
 
-<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/TEK0001.JPG" width="600">
+<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/Cycles.JPG" width="600">
 
 Yellow = PIN 6 - CLK
 GREEN  = PIN 5 - Display data  
