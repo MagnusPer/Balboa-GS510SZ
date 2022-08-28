@@ -25,7 +25,7 @@ RED    = PIN 8 - Button data <br />
  
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/Complete%20Sequence.JPG" width="1000">
 
-Display *37.5C*
+Display shows *37.5C* How does that translates into the bitstream??  
 
 ### Conclusion
 - The clock is pulsing 7 times for each byte  <br />
