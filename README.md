@@ -30,3 +30,6 @@ RED    = PIN 8 - Button data <br />
 - Totaly of 5 (maybe 6 bytes!) <br />
 - Each cycle is repeted every 20 ms <br />
 - Bit duration of the clock is 10 microseconds <br />
+
+### references
+- https://github.com/NickB1/OpenSpa/blob/master/documents/Balboa/Balboa_Display_Measurements.pdf
