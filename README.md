@@ -1,6 +1,7 @@
 # Balboa-GS510SZ
 
 ## RJ45 pins
+<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/docs/RJ45.png" width="200">
 
 | PIN           | Type            | Description   |
 | ------------- | --------------  |-------------- |
