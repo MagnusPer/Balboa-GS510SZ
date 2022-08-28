@@ -15,7 +15,7 @@
 
 ## Measurenments 
 
-Yellow = PIN 6 - CLK <br />
+YELLOW = PIN 6 - CLK <br />
 GREEN  = PIN 5 - Display data <br /> 
 RED    = PIN 8 - Button data <br />
 
