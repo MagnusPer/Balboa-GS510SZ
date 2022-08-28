@@ -1,6 +1,6 @@
 # Balboa-GS510SZ
 
-# PIN
+## PIN
 
 | PIN           | Type            | Description   |
 | ------------- | --------------  |-------------- |
@@ -13,7 +13,7 @@
 | PIN 7         | Digital Input   |  Pump 2       |
 | PIN 8         | Serial Tx       |  Buttons data |
 
-# Measurenments 
+## Measurenments 
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/PIN6-PIN5-PIN8.JPG" width="800">
 Yellow = PIN 6 - CLK
 GREEN  = PIN 5 - Display data  
