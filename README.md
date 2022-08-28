@@ -1,6 +1,6 @@
 # Balboa-GS510SZ
 
-## PIN
+## RJ45 pins
 
 | PIN           | Type            | Description   |
 | ------------- | --------------  |-------------- |
@@ -13,7 +13,7 @@
 | PIN 7         | Digital Input   |  Pump 2       |
 | PIN 8         | Serial Tx       |  Buttons data |
 
-## Measurenments 
+## Measurements 
 
 YELLOW = PIN 6 - CLK <br />
 BLUE  = PIN 5 - Display data <br /> 
