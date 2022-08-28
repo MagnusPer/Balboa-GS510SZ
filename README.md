@@ -25,6 +25,8 @@ RED    = PIN 8 - Button data <br />
  
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/Complete%20Sequence.JPG" width="1000">
 
+Display *37.5C*
+
 ### Conclusion
 - The clock is pulsing 7 times for each byte  <br />
 - Totaly of 5 (maybe 6 bytes!) <br />
