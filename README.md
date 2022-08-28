@@ -16,7 +16,7 @@
 ## Measurenments 
 
 YELLOW = PIN 6 - CLK <br />
-GREEN  = PIN 5 - Display data <br /> 
+BKUE  = PIN 5 - Display data <br /> 
 RED    = PIN 8 - Button data <br />
 
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/Cycles.JPG" width="400">
