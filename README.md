@@ -37,3 +37,4 @@ Display shows **37.5C** - How does that translates into the bitstream??
 
 ### references
 - https://github.com/NickB1/OpenSpa/blob/master/documents/Balboa/Balboa_Display_Measurements.pdf
+- https://www.olivierhill.ca/archives/72-The-Internet-of-Spas.html
