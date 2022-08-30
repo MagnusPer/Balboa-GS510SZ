@@ -33,7 +33,7 @@ RED    = PIN 8 - Button data <br />
 - One cycle duration 1.88 ms
 - Bit duration of the clock is 10 microseconds <br />
 
-Display shows **37.5C** - How does that translates into the bitstream? It Seems to be encoded in BCD to 7 segment shift registers where:<br />
+Display shows **37.5C** - How does that translates into the bitstream? It Seems to be encoded in BCD to 7 segment for shift registers (see references)<br />
 3 = 1111001(0) = 0x79  (Chunk 1) <br />
 7 = 1110000(0) = 0x70  (Chunk 2) <br />
 5 = 1011011(0) = 0x5B  (Chunk 3) <br />
