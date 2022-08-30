@@ -44,5 +44,12 @@ Display shows **37.5C** - How does that translates into the bitstream? It Seems 
 - https://create.arduino.cc/projecthub/meljr/7-segment-led-displays-102-using-a-shift-register-6b6976
 
 
+### First implementation to decode data is done
+
+
+
+
+
+
 ### Remember
 Compile ESP8266 with 160Mhz otherwise a sample will be lost! 
