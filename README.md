@@ -29,9 +29,9 @@ RED    = PIN 8 - Button data <br />
 Display shows **37.5C** - How does that translates into the bitstream??  
 
 Seems to be encoded in BCD to 7 segment shift registers where:<br />
-3 = 1111001(0) = 0x79 <br />
-7 = 1110000(0) = 0x70 <br />
-5 = 1011011(0) = 0x5B <br />
+(Chunk 1)  3 = 1111001(0) = 0x79 <br />
+(Chunk 2)  7 = 1110000(0) = 0x70 <br />
+(Chunk 3)  5 = 1011011(0) = 0x5B <br />
 
 ### Conclusion
 - The clock is pulsing 7 times for each chunck (not byte!) - really strange behaviour, why not 8 !! <br />
