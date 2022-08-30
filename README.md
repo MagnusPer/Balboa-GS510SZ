@@ -46,10 +46,7 @@ Display shows **37.5C** - How does that translates into the bitstream? It Seems 
 
 ### First implementation to decode data is done
 
-
-
-
-
+<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/Capture.JPG" width="400">
 
 ### Remember
 Compile ESP8266 with 160Mhz otherwise a sample will be lost! 
