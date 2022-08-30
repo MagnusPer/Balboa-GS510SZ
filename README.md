@@ -26,19 +26,17 @@ RED    = PIN 8 - Button data <br />
  
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/Complete%20Sequence.JPG" width="1000">
 
-Display shows **37.5C** - How does that translates into the bitstream??  
-
-Seems to be encoded in BCD to 7 segment shift registers where:<br />
-(Chunk 1)  3 = 1111001(0) = 0x79 <br />
-(Chunk 2)  7 = 1110000(0) = 0x70 <br />
-(Chunk 3)  5 = 1011011(0) = 0x5B <br />
-
 ### Conclusion
 - The clock is pulsing 7 times for each chunck (not byte!) - really strange behaviour, why not 8 !! <br />
 - Totaly of 6 chunks in each cycle <br />
 - Each cycle is repeted every 20 ms <br />
 - One cycle duration 1.88 ms
 - Bit duration of the clock is 10 microseconds <br />
+
+Display shows **37.5C** - How does that translates into the bitstream? It Seems to be encoded in BCD to 7 segment shift registers where:<br />
+(Chunk 1)  3 = 1111001(0) = 0x79 <br />
+(Chunk 2)  7 = 1110000(0) = 0x70 <br />
+(Chunk 3)  5 = 1011011(0) = 0x5B <br />
 
 ### references
 - https://github.com/NickB1/OpenSpa/blob/master/documents/Balboa/Balboa_Display_Measurements.pdf
