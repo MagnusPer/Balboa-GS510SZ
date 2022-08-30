@@ -35,7 +35,7 @@ Seems to be encoded in BCD to 7 segment shift registers where:<br />
 
 ### Conclusion
 - The clock is pulsing 7 times for each chunck (not byte!) - really strange behaviour, why not 8 !! <br />
-- Totaly of 6 bytes in each cycle <br />
+- Totaly of 6 chunks in each cycle <br />
 - Each cycle is repeted every 20 ms <br />
 - One cycle duration 1.88 ms
 - Bit duration of the clock is 10 microseconds <br />
