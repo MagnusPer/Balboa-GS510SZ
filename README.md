@@ -39,7 +39,7 @@ Display shows **37.5C** - How does that translates into the bitstream? It seems 
 7 = 1110000(0) = 0x70  (Chunk 2) <br />
 5 = 1011011(0) = 0x5B  (Chunk 3) <br />
 
-### references
+### References
 - https://github.com/NickB1/OpenSpa/blob/master/documents/Balboa/Balboa_Display_Measurements.pdf
 - https://www.olivierhill.ca/archives/72-The-Internet-of-Spas.html
 - https://create.arduino.cc/projecthub/meljr/7-segment-led-displays-102-using-a-shift-register-6b6976
@@ -50,4 +50,4 @@ Display shows **37.5C** - How does that translates into the bitstream? It seems 
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/Capture.JPG" width="400">
 
 ### Remember
-Compile ESP8266 with 160Mhz otherwise a sample will be lost! 
+Compile ESP8266 with 160Mhz otherwise samples may be lost - still digging in why! 
