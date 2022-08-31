@@ -20,9 +20,12 @@ YELLOW = PIN 6 - CLK <br />
 BLUE  = PIN 5 - Display data <br /> 
 RED    = PIN 8 - Button data <br />
 
+<p align="center">
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/Cycles.JPG" width="350">   <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/PIN6-PIN5-PIN8.JPG" width="400">
- 
+</p>
+<p align="center">
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/Complete%20Sequence.JPG" width="1000">
+</p>
 
 ### Conclusion
 - The clock is pulsing 7 times for each chunck (not byte!) - really strange behaviour, why not 8 !! <br />
