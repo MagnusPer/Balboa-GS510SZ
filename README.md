@@ -40,6 +40,16 @@ Display shows **37.5C** - How does that translates into the bitstream? It seems 
 5 = 1011011(0) = 0x5B  (Chunk 3) <br />
 C = 1001110(0) = 0x4E  (Chunk 4) <br />
 
+| Chunk 1 - bit(0-6) | Chunk 2 - bit(7-13) | Chunk 3 - bit(14-20) | Chunk 4 - bit(21-27) | Chunk 5 - bit(28-34) | Chunk 6 - bit(35-38) | 
+| -----------------  | ------------------- | ------------------   | -------------------- | -------------------- | ------------------   |
+| LCD segment 1      |  LCD segment 2      |   LCD Segment 3      |   LCD segment 4      | 28 - Button down/up  | 35 - Heater          |
+|                    |                     |                      |                      | 29 - ?               | 36 - Pump 2          |
+|                    |                     |                      |                      | 30 - ?               | 37 - Pump 1          |
+|                    |                     |                      |                      | 31 - Standard mode   | 38 - Light           |
+|                    |                     |                      |                      | 32 - ?               |                      |
+|                    |                     |                      |                      | 33 - ?               |                      |
+|                    |                     |                      |                      | 34 - ?               |                      |
+   
 ### References
 - https://github.com/NickB1/OpenSpa/blob/master/documents/Balboa/Balboa_Display_Measurements.pdf
 - https://www.olivierhill.ca/archives/72-The-Internet-of-Spas.html
