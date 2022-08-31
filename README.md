@@ -14,7 +14,7 @@
 | PIN 5         | Serial Tx       |  Display Data |
 | PIN 6         | CLK             |  Clock        |
 | PIN 7         | Digital Input   |  Pump 2       |
-| PIN 8         | Serial Tx       |  Display data with lower amplitude|
+| PIN 8         | CLK ?           |  Clock with lower amplitude|
 
 ## Measurements 
 
