@@ -58,7 +58,7 @@ C = 1001110(0) = 0x4E  (Chunk 4) <br />
 
 ### First implementation running to decode data is progressing...
 
-<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/Capture.JPG" width="400">
+<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/data_capture.JPG" width="600">
 
 ### Remember
 Compile ESP8266 with 160Mhz otherwise samples may be lost - still digging in why! 
