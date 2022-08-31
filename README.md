@@ -14,13 +14,13 @@
 | PIN 5         | Serial Tx       |  Display Data |
 | PIN 6         | CLK             |  Clock        |
 | PIN 7         | Digital Input   |  Pump 2       |
-| PIN 8         | CLK ?           |  Clock with lower amplitude|
+| PIN 8         | Serial TX       |  Combination of CLK and Display data |
 
 ## Measurements 
 
 YELLOW = PIN 6 - CLK <br />
 BLUE = PIN 5 - Display data <br /> 
-RED = PIN 8 - CLK with lower amplitude  <br />
+RED = PIN 8 - Combination of CLK and Display data  <br />
 
 <p align="center">
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/Cycles.JPG" width="350">   <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/PIN6-PIN5-PIN8.JPG" width="400">
