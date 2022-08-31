@@ -20,7 +20,7 @@ YELLOW = PIN 6 - CLK <br />
 BLUE  = PIN 5 - Display data <br /> 
 RED    = PIN 8 - Button data <br />
 
-<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/Cycles.JPG" width="400">
+<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/Cycles.JPG" width="370">
 
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/PIN6-PIN5-PIN8.JPG" width="400">
  
