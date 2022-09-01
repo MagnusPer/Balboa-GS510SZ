@@ -5,21 +5,22 @@
 ## RJ45 pins
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/docs/RJ45.png" width="200">
 
-| PIN           | Description                                           | 
-| ------------- | ----------------------------------------------------- |
-| PIN 1         | No function found yet! PWM putput from control system |
-| PIN 2         | No function found yet! PWM putput from control system |
-| PIN 3         | Button data                                           |  
-| PIN 4         | GND                                                   |
-| PIN 5         | Display data                                          | 
-| PIN 6         | Clock                                                 |
-| PIN 7         | 5 VDC                                                 |  
-| PIN 8         | Floating output                                       |
+| PIN           | Description             | 
+| ------------- | ------------------------|
+| PIN 1         | Functionality unclear!  |
+| PIN 2         | Functionality unclear!  |
+| PIN 3         | Button data             |  
+| PIN 4         | GND                     |
+| PIN 5         | Display data            | 
+| PIN 6         | Clock                   |
+| PIN 7         | 5 VDC                   |  
+| PIN 8         | Floating output         |
 
 ## Measurements 
 
-### PIN 1 and 2 (No found functinality)
+### PIN 1 and 2 (functionality unclear)
 50Hz, pk-pk=18v, mean 5V
+PWM output from controlsystem, however no found functionality for these yet! 
 
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/PIN_1%262.JPG" width="350">
 
