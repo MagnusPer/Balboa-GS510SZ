@@ -19,7 +19,7 @@
 ## Measurements 
 
 ### PIN 1 and 2 (functionality unclear)
-PWM output from controlsystem, however no found functionality for these yet! <br />  
+PWM output from controlsystem, unclear functionality for these PINs still! <br />  
 50Hz, pk-pk=18v, mean 5V
 
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/PIN_1%262.JPG" width="350">
