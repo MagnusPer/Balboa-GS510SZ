@@ -48,7 +48,7 @@ Hard to catch on the oscilloscope but there comes quick pulses for the display b
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/Complete%20Sequence.JPG" width="1000">
 </p>
 
-## Conclusion
+#### Conclusion
 - The clock is pulsing 7 times for each chunck (not byte!) - really strange behaviour, why not 8 !! <br />
 - Totaly of 6 chunks in each cycle <br />
 - Each cycle is repeted every 20 ms <br />
