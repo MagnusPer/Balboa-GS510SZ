@@ -77,7 +77,7 @@ C = 1001110(0) = 0x4E  (Chunk 4) <br />
 - https://create.arduino.cc/projecthub/meljr/7-segment-led-displays-102-using-a-shift-register-6b6976
 
 
-## First implementation running to decode data is progressing...
+## First implementation running to decode display data is progressing...
 
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/data_capture.JPG" width="600">
 
