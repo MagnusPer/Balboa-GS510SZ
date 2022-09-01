@@ -5,22 +5,40 @@
 ## RJ45 pins
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/docs/RJ45.png" width="200">
 
-| PIN           | Type            | Description   |
-| ------------- | --------------  |-------------- |
-| PIN 1         | Power           |  5 VDC        |
-| PIN 2         | ?               |               |
-| PIN 3         | Digital Input   |  Pump 1       |
-| PIN 4         | GND             |  Ground       |
-| PIN 5         | Serial Tx       |  Display Data |
-| PIN 6         | CLK             |  Clock        |
-| PIN 7         | Digital Input   |  Pump 2       |
-| PIN 8         | Serial TX       |  Combination of CLK and Display data |
+| PIN           | Description                                           | 
+| ------------- | ----------------------------------------------------- |
+| PIN 1         | No function found yet! PWM putput from control system |
+| PIN 2         | No function found yet! PWM putput from control system |
+| PIN 3         | Button data                                           |  
+| PIN 4         | GND                                                   |
+| PIN 5         | Display data                                          | 
+| PIN 6         | Clock                                                 |
+| PIN 7         | 5 VDC                                                 |  
+| PIN 8         | Floating output                                       |
 
 ## Measurements 
 
-YELLOW = PIN 6 - CLK <br />
-BLUE = PIN 5 - Display data <br /> 
-RED = PIN 8 - Combination of CLK and Display data  <br />
+### PIN 1 and 2 (No found functinality)
+50Hz, pk-pk=18v, mean 5V
+
+<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/PIN_1%262.JPG" width="350">
+
+### PIN 3 (Yellow - Button data), PIN 6 (Blue - Clock)
+hard to catch on the oscilloscope but there comes quick pulses for the display buttons when pressed
+
+<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/PIN3.JPG" width="350">
+
+| Button    |  Decoding          | 
+| --------- | ------------------ |
+| Mode      |                    |
+| Warm      |                    |
+| Cool      |                    |  
+| Light     |                    |
+| Blower    |                    | 
+| Jets 1    |                    |
+| Jets 2    |                    |  
+
+### PIN 6 (Yellow - Clock), PIN 5 (Blue - display data), PIN 8 (Pink - floating) 
 
 <p align="center">
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/Cycles.JPG" width="350">   <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/PIN6-PIN5-PIN8.JPG" width="400">
@@ -29,7 +47,7 @@ RED = PIN 8 - Combination of CLK and Display data  <br />
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/Complete%20Sequence.JPG" width="1000">
 </p>
 
-### Conclusion
+## Conclusion
 - The clock is pulsing 7 times for each chunck (not byte!) - really strange behaviour, why not 8 !! <br />
 - Totaly of 6 chunks in each cycle <br />
 - Each cycle is repeted every 20 ms <br />
@@ -52,13 +70,13 @@ C = 1001110(0) = 0x4E  (Chunk 4) <br />
 |                    |                     |                      |                      | 33 - ?               |                      |
 |                    |                     |                      |                      | 34 - ?               |                      |
    
-### References
+## References
 - https://github.com/NickB1/OpenSpa/blob/master/documents/Balboa/Balboa_Display_Measurements.pdf
 - https://www.olivierhill.ca/archives/72-The-Internet-of-Spas.html
 - https://create.arduino.cc/projecthub/meljr/7-segment-led-displays-102-using-a-shift-register-6b6976
 
 
-### First implementation running to decode data is progressing...
+## First implementation running to decode data is progressing...
 
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/data_capture.JPG" width="600">
 
