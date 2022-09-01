@@ -19,13 +19,13 @@
 ## Measurements 
 
 ### PIN 1 and 2 (functionality unclear)
+PWM output from controlsystem, however no found functionality for these yet! <br />  
 50Hz, pk-pk=18v, mean 5V
-PWM output from controlsystem, however no found functionality for these yet! 
 
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/PIN_1%262.JPG" width="350">
 
 ### PIN 3 (Yellow - Button data), PIN 6 (Blue - Clock)
-hard to catch on the oscilloscope but there comes quick pulses for the display buttons when pressed
+Hard to catch on the oscilloscope but there comes quick pulses for the display buttons when pressed.
 
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/PIN3.JPG" width="350">
 
