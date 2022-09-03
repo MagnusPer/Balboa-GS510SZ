@@ -45,7 +45,7 @@ Hard to catch on the oscilloscope but there comes quick pulses for the display b
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/Cycles.JPG" width="350">   <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/PIN6-PIN5-PIN8.JPG" width="400">
 </p>
 <p align="center">
-<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/Complete%20Sequence.JPG" width="1000">
+<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/Sequence.jpg" width="1000">
 </p>
 
 #### Conclusion
