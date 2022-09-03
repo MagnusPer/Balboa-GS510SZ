@@ -22,7 +22,7 @@
 PWM output from controlsystem, unclear functionality for these PINs still! <br />  
 50Hz, pk-pk=18v, mean 5V
 
-<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/PIN_1%262.JPG" width="350">
+<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/PIN_1%262.JPG" width="300">
 
 ### PIN 6 (Yellow - clock), PIN 5 (Blue - display data), PIN 3 (Pink - button data) 
 
@@ -31,6 +31,7 @@ PWM output from controlsystem, unclear functionality for these PINs still! <br /
 <p align="center">
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/Sequence.jpg" width="1000">
 </p>
+
 
 #### Conclusion
 - The clock is pulsing 7 times for each chunck of display data  <br />
