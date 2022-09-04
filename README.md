@@ -6,7 +6,7 @@
 
 
 ## RJ45 pins
-<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/docs/RJ45.png" width="200">
+<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/docs/RJ45.jpg" width="200">
 
 | PIN           | Description             | 
 | ------------- | ------------------------|
