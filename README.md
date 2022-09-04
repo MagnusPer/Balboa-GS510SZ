@@ -2,6 +2,9 @@
 
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/docs/balboa_gs501sz.jpg" width="400"> <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/docs/VL700S.jpg" width="400">
 
+
+
+
 ## RJ45 pins
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/docs/RJ45.png" width="200">
 
