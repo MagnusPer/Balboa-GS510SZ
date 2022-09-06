@@ -22,7 +22,7 @@
 ## Measurements 
 
 ### PIN 1 and 2 
-Same PWM output from control system on both pins. Unclear functionality for these PINs still! <br />  
+PWM output from control system, same on both pins. Unclear functionality for these PINs still! Maybe some internal light supply? <br />  
 50Hz, pk-pk=18v, mean 5V
 
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/PIN_1%262.JPG" width="300">
