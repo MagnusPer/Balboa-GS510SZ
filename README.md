@@ -72,6 +72,13 @@ C = 1001110(0) = 0x4E  (Chunk 4) <br />
 | Pump 2    |   0 1 0            |
 | Pump 3    |   1 1 1            |  
 
+## Wiring
+
+Since the display and controler unit have unknown hardware design, I put an OR-gate between the button data line to protect simultaneous enable/disable from display and Arduino.
+
+ToDo: voltage adjust the Arduino input to max 3.3V
+
+<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/docs/Balboa_GS_Interface.jpg" width="1000">
 
 ## References
 - https://github.com/NickB1/OpenSpa/blob/master/documents/Balboa/Balboa_Display_Measurements.pdf
