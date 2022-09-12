@@ -74,7 +74,7 @@ C = 1001110(0) = 0x4E  (Chunk 4) <br />
 
 ## Wiring
 
-Since the display and controler unit have unknown hardware design, I put an OR-gate between the button data line to protect simultaneous enable/disable from display and Arduino.
+Since the display and controler unit have unknown hardware design, I put an OR-gate between the button data line to protect simultaneous HIGH/LOW levels from display and Arduino.
 
 ToDo: voltage adjust the Arduino input to max 3.3V
 
