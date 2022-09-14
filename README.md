@@ -1,8 +1,6 @@
 # Balboa-GS510SZ with panel VL700S
 
-<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/extras/docs/balboa_gs501sz.jpg" width="400"> <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/extras/docs/VL700S.jpg" width="400">
-
-
+<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/extras/docs/balboa_GS510SZ.jpg" width="400"> <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/extras/docs/VL700S.jpg" width="400">
 
 
 ## RJ45 pins
