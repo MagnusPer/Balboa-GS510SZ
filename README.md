@@ -82,8 +82,7 @@ ToDo: voltage adjust the Arduino input to max 3.3V
 
 ## Software
 
-**version 1.0**
-Basic functionality to read and set status using a **Balboa_GS** developed library. Two examples are provided, first with simple read and set functionality and the second using MQTT for remote access.     
+**version 1.0**<br /> Basic functionality to read and set status using a **Balboa_GS** developed library. Two examples are provided, first with simple read and set functionality and the second using MQTT for remote access.     
 
 ## References of great help!
 - https://github.com/NickB1/OpenSpa/blob/master/documents/Balboa/Balboa_Display_Measurements.pdf
