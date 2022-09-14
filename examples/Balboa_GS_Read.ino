@@ -1,20 +1,25 @@
+ /*
+ *    
+ *    Main board: Wemos D1 mini - esp8266
+ *  
+ *    SPA display controller for Balboa system GS510SZ
+ *    
+ */
+
 
 #include "Balboa_GS_Interface.h" 
 
 
-char serialMonitorInput                       = 0;              // for incoming serial monitor data
+char serialMonitorInput       = 0;                  // Serial monitor data
+unsigned long printMillis     = 3000;               // Time in milliseconds the status are printed 
+unsigned long printPrevMillis = 0;                  // Store previous millis
 
-unsigned long printMillis                 = 3000;               // Time in milliseconds the status are printed 
-unsigned long printPrevMillis             = 0;                  // Store previous millis
-
-#define ClockPin D1  // esp8266: D1, D2, D8 (GPIO 5, 4, 15)
-#define ReadPin  D2  // esp8266: D1, D2, D8 (GPIO 5, 4, 15)
-#define WritePin D8  // esp8266: D1, D2, D8 (GPIO 5, 4, 15)
+#define setClockPin D1  
+#define setReadPin  D2 
+#define setWritePin D8  
 
 // Initialize components
-BalboaInterface Balboa(ClockPin, ReadPin, WritePin);
-
-
+BalboaInterface Balboa(setClockPin, setReadPin, setWritePin);
 
 
 void setup() {
@@ -49,7 +54,7 @@ void loop() {
                         Serial.println("Write - Mode");
                         break;
                   case '4':
-                        Balboa,writeButtonData = true;
+                        Balboa.writeButtonData = true;
                         Balboa.writeLight      = true; 
                         Serial.println("Write - Light");
                         break;
@@ -74,42 +79,31 @@ void loop() {
      }
 
  
-      if(millis() - printPrevMillis  > printMillis && displayDataBufferReady) {
-      
-         /*   printPrevMillis = millis();
-            
-            for (int x = 0; x <= displayDataBits; x++) {
-                              
-                  Serial.print(displayDataBuffer[x]);
-                  
-                  if (x == 6 || x == 13 || x == 20 || x == 27 || x == 34 ) {
-                     Serial.print(" ");
-                  }
-            }*/
-            
-            Serial.println("");
-            Serial.print("Water temperature (int): ");
-            Serial.println(Balboa.waterTemperature); 
-            Serial.print("Set temperature ");
-            Serial.println(Balboa.setTemperature); 
-            Serial.print("Water temperature (string): ");
-            Serial.println(Balboa.LCD_display);
-            Serial.print("Display button: ");
-            Serial.println(Balboa.displayButton);
-            Serial.print("Standard mode: ");
-            Serial.println(Balboa.displayStandardMode);
-            Serial.print("Heater: ");
-            Serial.println(Balboa.displayHeater);
-            Serial.print("Pump 1: ");
-            Serial.println(Balboa.displayPump1);
-            Serial.print("Pump 2: ");
-            Serial.println(Balboa.displayPump2);
-            Serial.print("Light: ");
-            Serial.println(Balboa.displayLight);
-           
-      } 
-
-   
-       
+    if(millis() - printPrevMillis  > printMillis) {
+    
+          printPrevMillis = millis();
+          
+          Serial.println("");
+          Serial.print("Water temperature): ");
+          Serial.println(Balboa.waterTemperature); 
+          Serial.print("Set temperature: ");
+          Serial.println(Balboa.setTemperature); 
+          Serial.print("LCD Display: ");
+          Serial.println(Balboa.LCD_display);
+          Serial.print("Display button: ");
+          Serial.println(Balboa.displayButton);
+          Serial.print("Standard mode: ");
+          Serial.println(Balboa.displayStandardMode);
+          Serial.print("Heater: ");
+          Serial.println(Balboa.displayHeater);
+          Serial.print("Pump 1: ");
+          Serial.println(Balboa.displayPump1);
+          Serial.print("Pump 2: ");
+          Serial.println(Balboa.displayPump2);
+          Serial.print("Light: ");
+          Serial.println(Balboa.displayLight);
+          Serial.println("");
+         
+    } 
+     
 }
-
