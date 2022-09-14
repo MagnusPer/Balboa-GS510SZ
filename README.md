@@ -1,6 +1,6 @@
 # Balboa-GS510SZ with panel VL700S
 
-<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/docs/balboa_gs501sz.jpg" width="400"> <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/docs/VL700S.jpg" width="400">
+<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/extras/docs/balboa_gs501sz.jpg" width="400"> <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/extras/docs/VL700S.jpg" width="400">
 
 
 
@@ -25,14 +25,14 @@
 PWM output from control system, same on both pins. Unclear functionality for these PINs still! Maybe some internal light supply? <br />  
 50Hz, pk-pk=18v, mean 5V
 
-<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/PIN_1%262.JPG" width="300">
+<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/extras/measurements/PIN_1%262.JPG" width="300">
 
 ### PIN 6 (Yellow - clock), PIN 5 (Blue - display data), PIN 3 (Pink - button data) 
 
-<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/Multiple_sequences.jpg" width="350">   
+<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/extras/measurements/Multiple_sequences.jpg" width="350">   
 
 <p align="center">
-<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/measurements/Sequence.jpg" width="1000">
+<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/extras/measurements/Sequence.jpg" width="1000">
 </p>
 
 #### Conclusion
@@ -78,7 +78,7 @@ Since the display and controler unit hardware design is unknown an OR-gate is us
 
 ToDo: voltage adjust the Arduino input to max 3.3V
 
-<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/docs/Balboa_GS_Interface.jpg" width="1000">
+<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/extras/docs/Balboa_GS_Interface.jpg" width="1000">
 
 ## Software
 
