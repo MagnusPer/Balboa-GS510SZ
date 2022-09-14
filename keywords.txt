@@ -1,0 +1,62 @@
+###################################################################
+# Class
+###################################################################
+
+BalboaInterface	KEYWORD1
+Balboa	KEYWORD1
+
+###################################################################
+# Methods and Functions
+###################################################################
+
+begin	KEYWORD2
+stop	KEYWORD2
+loop	KEYWORD2
+
+printBinary	KEYWORD2
+printMessage	KEYWORD2
+lockup_LCD_character KEYWORD2	
+
+LCD_segment_1	KEYWORD2
+LCD_segment_1	KEYWORD2
+LCD_segment_2	KEYWORD2
+LCD_segment_3	KEYWORD2
+LCD_segment_4	KEYWORD2
+LCD_display_1	KEYWORD2
+LCD_display_2	KEYWORD2
+LCD_display_3	KEYWORD2
+LCD_display_4	KEYWORD2
+LCD_display	KEYWORD2
+displayButton	KEYWORD2
+displayBit29	KEYWORD2
+displayBit30	KEYWORD2
+displayStandardMode	KEYWORD2
+displayBit32	KEYWORD2
+displayBit33	KEYWORD2
+displayBit34	KEYWORD2
+displayHeater	KEYWORD2
+displayPump2	KEYWORD2
+displayPump1	KEYWORD2
+displayLight	KEYWORD2
+displayDataBufferOverflow	KEYWORD2
+writeButtonData	KEYWORD2
+writeMode	KEYWORD2
+writeTempUp	KEYWORD2 
+writeTempDown	KEYWORD2
+writeLight	KEYWORD2
+writePump1	KEYWORD2
+writePump2	KEYWORD2   	
+writePump3	KEYWORD2
+
+###################################################################
+# Constants
+###################################################################
+
+clockPin	LITERAL1
+ReadPin		LITERAL1
+WritePin	LITERAL1
+displayDataBufferSize	LITERAL1
+displayDataBits	LITERAL1
+buttonDataBits	LITERAL1
+totalDataBits	LITERAL1
+durationNewCycle	LITERAL1
