@@ -6,7 +6,7 @@ byte BalboaInterface::clockPin;
 byte BalboaInterface::displayPin;
 byte BalboaInterface::buttonPin;
 bool BalboaInterface::displayDataBufferOverflow;
-bool BalboaInterface::writeButtonData;       
+bool BalboaInterface::writeDisplayData;       
 bool BalboaInterface::writeMode;
 bool BalboaInterface::writeTempUp;
 bool BalboaInterface::writeTempDown;
@@ -35,7 +35,8 @@ void BalboaInterface::begin() {
   digitalWrite(buttonPin,LOW);   
    
   attachInterrupt(clockPin, clockPinInterrupt, CHANGE);
-}
+  
+ }
 
 void BalboaInterface::stop() {
   
@@ -45,12 +46,56 @@ void BalboaInterface::stop() {
 
 bool BalboaInterface::loop() {
 
-  if (displayDataBufferReady) { decodeDisplayData(); }
-   	
+	if (displayDataBufferReady) { 
+		
+		// Decode data onces available 
+		decodeDisplayData(); 
+		
+		// Get setTemperature if not known 
+		if (setTemperature == 0) {
+			writeDisplayData = true;
+			writeTempUp = true;
+		}
+				
+		
+		// Update temperature 
+		if (updateTempButtonPresses > 0) {
+			
+			if(millis() - buttonPressTimerPrevMillis  > buttonPressTimerMillis) {
+				
+				buttonPressTimerPrevMillis = millis();
+
+				if (updateTempDirection == 1) {
+					writeDisplayData = true;
+					writeTempDown = true;
+				}
+				else if (updateTempDirection == 2) {
+					writeDisplayData = true;
+					writeTempUp = true;
+				}
+			
+				updateTempButtonPresses--;
+			}
+		}
+	}
+	   	
   return true;	
-  
 }
 
+
+void BalboaInterface::updateTemperature(float Temperature){
+	
+	float updateTempDifference = Temperature - setTemperature;
+	
+	if (updateTempDifference < 0 ) 		 { updateTempDirection = 1; }			// Temp down
+	else if (updateTempDifference > 0 )  { updateTempDirection = 2; }			// Temp up
+	else if (updateTempDifference == 0 ) { updateTempDirection = 0; }			// no change
+	
+	updateTempButtonPresses = 1 + (abs(updateTempDifference) * 2);				// calculate how many times the "button" should be pressed 
+																				// every button press = 0.5 and the first is to enter the menu																			
+}
+	
+	
 void BalboaInterface::decodeDisplayData() {
 
       LCD_segment_1 = 0;
@@ -171,20 +216,25 @@ void BalboaInterface::decodeDisplayData() {
            LCD_display_4 = lockup_LCD_character(LCD_segment_4);  
       
            
-             // If temperature or something else is shown on LCD display
+             // check if temperature or something else is shown on LCD display
            
-             if(LCD_segment_1 == 0) {   
+             // No temperature is shown
+			 if(LCD_segment_1 == 0) {   
                   LCD_display = LCD_display_1 + LCD_display_2 + LCD_display_3 + LCD_display_4; 
              } 
-             else {
-                 waterTemperature = (10 * LCD_display_1.toInt() + LCD_display_2.toInt() + 0.1 * LCD_display_3.toInt());
-                 LCD_display = LCD_display_1 + LCD_display_2 + "." + LCD_display_3 + LCD_display_4; 
+             
+			 // Temperature is shown
+			 else {
+                 
+				float Temperature = (10 * LCD_display_1.toInt() + LCD_display_2.toInt() + 0.1 * LCD_display_3.toInt());
+				 
+				if (displayButton) {setTemperature = Temperature;}
+				else {waterTemperature = Temperature;}  
+				                 
+				LCD_display = LCD_display_1 + LCD_display_2 + "." + LCD_display_3 + LCD_display_4; 
              }
 
-            // Store the set temperature
-
-            if (displayButton) {  setTemperature = waterTemperature; }
-                   
+                          
             displayDataBufferReady = false;
             attachInterrupt(clockPin, clockPinInterrupt, CHANGE);
 }
@@ -209,7 +259,7 @@ void BalboaInterface::decodeDisplayData() {
                                          
                   // Write button data if requested
                   
-                  if (writeButtonData == true && clockBitCounter >= 39 && clockBitCounter <= 41){
+                  if (writeDisplayData == true && clockBitCounter >= 39 && clockBitCounter <= 41){
                             
                           if (clockBitCounter == 39) {
                                  
@@ -272,7 +322,6 @@ void BalboaInterface::decodeDisplayData() {
            }
       }
 } 
-
 
 String BalboaInterface::lockup_LCD_character(int LCD_character) {
 

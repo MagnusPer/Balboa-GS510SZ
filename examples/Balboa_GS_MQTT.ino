@@ -6,13 +6,14 @@
  *    
  */
     
+#include <ESPAsyncTCP.h>                // https://github.com/me-no-dev/ESPAsyncTCP
+#include <ESPAsyncWebServer.h>          // https://github.com/me-no-dev/ESPAsyncWebServer
+#include <AsyncElegantOTA.h>            // https://github.com/ayushsharma82/AsyncElegantOTA
 
-#include "Balboa_GS_Interface.h" 
-#include <ESP8266WiFi.h>
-#include <WiFiUdp.h>
-#include <ArduinoOTA.h>
-#include <PubSubClient.h>
+#include <ESP8266WiFi.h>  
 
+#include <PubSubClient.h>               // https://github.com/knolleary/pubsubclient
+#include <Balboa_GS_Interface.h>        // https://github.com/MagnusPer/Balboa-GS510SZ    
 
 #define setClockPin D1  
 #define setReadPin  D2 
@@ -20,16 +21,14 @@
 
 
 //Constants
-const char *wifi_ssid                    = "";            // Your WiFi SSID
-const char *wifi_pwd                     = "";            // Your WiFi Password
+const char *wifi_ssid                    = "";                   // WiFi SSID
+const char *wifi_pwd                     = "";                   // WiFi Password 
 const char *wifi_hostname                = "SPA";
-const char* mqtt_server                  = "";            // MQTT Boker IP, your home MQTT server eg Mosquitto on RPi, or some public MQTT
-const int mqtt_port                      = 1883;          // MQTT Broker PORT, default is 1883 but can be anything.
-const char *mqtt_user                    = "";            // MQTT Broker User Name
-const char *mqtt_pwd                     = "D";           // MQTT Broker Password 
+const char* mqtt_server                  = "";                   // MQTT Boker IP, your home MQTT server eg Mosquitto on RPi, or some public MQTT
+const int mqtt_port                      = 1883;                 // MQTT Broker PORT, default is 1883 but can be anything.
+const char *mqtt_user                    = "";                   // MQTT Broker User Name
+const char *mqtt_pwd                     = "";                   // MQTT Broker Password 
 String clientId                          = "SPA : " + String(ESP.getChipId(), HEX);
-const char *ota_hostname                 = "SPA";
-const char *ota_pwd                      = "SPA1234";
 
 //Globals 
 bool debug                               = true;    // If true activate debug values to write to serial port
@@ -39,21 +38,21 @@ unsigned long ReportTimerPrevMillis      = 0;       // Store previous millis
 
 
 // MQTT Constants
+const char* mqtt_Display_topic              = "SPA/Display";
+const char* mqtt_SetTemp_topic              = "SPA/SetTemp";
+const char* mqtt_WaterTemp_topic            = "SPA/WaterTemp";
+const char* mqtt_Heater_topic               = "SPA/Heater";
+const char* mqtt_Pump1_topic                = "SPA/Pump1";
+const char* mqtt_Pump2_topic                = "SPA/Pump2";
+const char* mqtt_Lights_topic               = "SPA/Lights";
+const char* mqtt_Subscribe_write_topic      = "SPA/Write"; 
+const char* mqtt_Subscribe_updateTemp_topic = "SPA/UpdateTemp";
 
-const char* mqtt_Display_topic          = "SPA/Display";
-const char* mqtt_SetTemp_topic          = "SPA/SetTemp";
-const char* mqtt_WaterTemp_topic        = "SPA/WaterTemp";
-const char* mqtt_Heater_topic           = "SPA/Heater";
-const char* mqtt_Pump1_topic            = "SPA/Pump1";
-const char* mqtt_Pump2_topic            = "SPA/Pump2";
-const char* mqtt_Lights_topic           = "SPA/Lights";
-const char* mqtt_Subscribe_topic        = "SPA/Write"; 
-
-// Initialize components
-WiFiClient espClient;                              // Setup WiFi client definition WiFi
-PubSubClient client(espClient);                    // Setup MQTT client
-BalboaInterface Balboa(setClockPin, setReadPin, setWritePin);
-
+//Initialize components
+WiFiClient espClient;                                           // Setup WiFi client definition WiFi
+PubSubClient client(espClient);                                 // Setup MQTT client
+BalboaInterface Balboa(setClockPin, setReadPin, setWritePin);   // Setup Balboa interface 
+AsyncWebServer server(80);
 
 /**************************************************************************/
 /* Setup                                                                  */
@@ -63,10 +62,17 @@ void setup() {
   
   if (debug) { Serial.begin(115200); Serial.println("Welcome to SPA - Balboa system GS510SZ"); }
   setup_wifi();
-  setup_ota(); 
   client.setCallback(callback);
   Serial.begin(115200);
   Balboa.begin();
+
+  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
+    request->send(200, "text/plain", "Hi! This is a sample response.");
+  });
+  
+  AsyncElegantOTA.begin(&server);    // Start AsyncElegantOTA
+  server.begin();
+  if (debug) { Serial.println("HTTP server started"); }
 
 }
 
@@ -107,25 +113,6 @@ void setup_wifi() {
 
 }
 
-/**************************************************************************/
-/* Setup OTA connection                                                   */
-/**************************************************************************/
-
-void setup_ota() {
-
-    ArduinoOTA.setHostname(ota_hostname); 
-    ArduinoOTA.setPassword(ota_pwd);
-    ArduinoOTA.onStart([]() {});
-    ArduinoOTA.onEnd([]() {});
-    ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {});
-    ArduinoOTA.onError([](ota_error_t error) {
-          // (void)error;
-          // ESP.restart();
-          });
-    ArduinoOTA.begin();
-
-}
-
 
 /**************************************************************************/
 /* Setup MQTT connection                                                   */
@@ -147,7 +134,9 @@ void reconnect() {
     
     if (debug && client.connected()){ Serial.println(" MQTT connected"); }
 
-    client.subscribe(mqtt_Subscribe_topic);
+    client.subscribe(mqtt_Subscribe_write_topic);
+    client.subscribe(mqtt_Subscribe_updateTemp_topic);
+   
     
 }
 
@@ -157,14 +146,13 @@ void reconnect() {
 /**************************************************************************/
 
 void loop() {
-	
-	ArduinoOTA.handle();
+
+ // ArduinoOTA.handle();
 	Balboa.loop();
   client.loop();
   
   if (WiFi.status() != WL_CONNECTED){ setup_wifi(); }             // Check WiFi connnection reconnect otherwise 
   if (!client.connected()) { reconnect(); }                       // Check MQTT connnection reconnect otherwise 
-
 
 
  
@@ -185,7 +173,7 @@ void loop() {
 }
 
 /**************************************************************************/
-/* Subscribe to MQTT topic                                                            */
+/* Subscribe to MQTT topic                                                */
 /**************************************************************************/
 
 void callback(char* topic, byte* payload, unsigned int length) {
@@ -202,37 +190,43 @@ void callback(char* topic, byte* payload, unsigned int length) {
     Serial.println(s_topic);
     Serial.println(s_payload);
 
-      if ( s_topic == mqtt_Subscribe_topic ) {
+      if ( s_topic == mqtt_Subscribe_write_topic ) {
          
-            if (s_payload == "TempUp") {
-                Balboa.writeButtonData = true; 
-                Balboa.writeTempUp     = true;
-            }
-            else if (s_payload == "TempDown") {
-                Balboa.writeButtonData = true;
-                Balboa.writeTempDown   = true;  
-            }
-            else if (s_payload == "Light") {
-                Balboa.writeButtonData = true;
-                Balboa.writeLight      = true; 
-            }
-            else if (s_payload == "Pump1") {
-                Balboa.writeButtonData = true;
-                Balboa.writePump1      = true;  
-            }
-            else if (s_payload == "Pump2") {
-                Balboa.writeButtonData = true;
-                Balboa.writePump2      = true;  
-            }
-            else if (s_payload == "Pump3") {
-                Balboa.writeButtonData = true;
-                Balboa.writePump3      = true;  
-            }
-            else if (s_payload == "Mode") {
-                Balboa.writeButtonData = true;
-                Balboa.writeMode       = true;  
-           }
-  
+              if (s_payload == "TempUp") {
+                  Balboa.writeDisplayData = true; 
+                  Balboa.writeTempUp      = true;
+              }
+              else if (s_payload == "TempDown") {
+                  Balboa.writeDisplayData = true;
+                  Balboa.writeTempDown    = true;  
+              }
+              else if (s_payload == "Light") {
+                  Balboa.writeDisplayData = true;
+                  Balboa.writeLight       = true; 
+              }
+              else if (s_payload == "Pump1") {
+                  Balboa.writeDisplayData = true;
+                  Balboa.writePump1       = true;  
+              }
+              else if (s_payload == "Pump2") {
+                  Balboa.writeDisplayData = true;
+                  Balboa.writePump2       = true;  
+              }
+              else if (s_payload == "Pump3") {
+                  Balboa.writeDisplayData = true;
+                  Balboa.writePump3       = true;  
+              }
+              else if (s_payload == "Mode") {
+                  Balboa.writeDisplayData = true;
+                  Balboa.writeMode        = true;  
+             }
       }
+
+      if ( s_topic == mqtt_Subscribe_updateTemp_topic) {
+        
+            Balboa.updateTemperature(s_payload.toFloat());
+      }
+
+      
 }
       

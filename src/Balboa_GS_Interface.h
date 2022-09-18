@@ -5,12 +5,12 @@
 #include <Arduino.h>
 
 
-const byte displayDataBufferSize       = 40;			   // Size of display data buffer
-const byte displayDataBits             = 38;               // 0-38 bits length of display data within a cycle
-const byte buttonDataBits              = 2;                // 0-2 bits length of button data within a cycle
-const byte totalDataBits               = 41;               // 0-41 total number of pulses within a cycle
-const unsigned int durationNewCycle    = 5000;             // How many microsecounds to detect new cycle if no interrupt occurs 
-
+const byte displayDataBufferSize       		= 40;		// Size of display data buffer
+const byte displayDataBits             		= 38;       // 0-38 bits length of display data within a cycle
+const byte buttonDataBits              		= 2;        // 0-2 bits length of button data within a cycle
+const byte totalDataBits               		= 41;       // 0-41 total number of pulses within a cycle
+const unsigned int durationNewCycle    		= 5000;		// How many microsecounds to detect new cycle if no interrupt occurs 
+const unsigned long buttonPressTimerMillis  = 500;  	// Timer in milliseconds between update temperature button presses 
 
 
 class BalboaInterface {
@@ -20,10 +20,11 @@ class BalboaInterface {
 	BalboaInterface(byte setClockPin, byte setReadPin, byte setWritePin);
 	
 	// Interface control
-	void begin();//(Stream &_stream = Serial);           // Initializes the stream output to Serial by default
+	void begin();						           	// Initializes the stream output to Serial by default
     bool loop();                                    // Returns true if valid data is available
     void stop();                                    // Disables the clock hardware interrupt 
     void resetStatus();                             // Resets the state of all status components as changed for sketches to get the current status	
+	void updateTemperature(float Temperature);		// Function to set the water temperature 	
 
 	// Status tracking
 	float waterTemperature;                			// Water temperatur 
@@ -43,7 +44,7 @@ class BalboaInterface {
 	static bool displayDataBufferOverflow;
 	
 	// Write button data to control unit  
-	static bool writeButtonData;            		// If something should be written to button data line  
+	static bool writeDisplayData;            		// If something should be written to button data line  
 	static bool writeMode;
 	static bool writeTempUp;
 	static bool writeTempDown;
@@ -74,6 +75,9 @@ class BalboaInterface {
     static byte displayPin;
     static byte buttonPin;
 
+	int updateTempDirection;
+	int updateTempButtonPresses;
+	unsigned long buttonPressTimerPrevMillis; 
 };
 
   

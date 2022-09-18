@@ -14,6 +14,7 @@ char serialMonitorInput       = 0;                  // Serial monitor data
 unsigned long printMillis     = 3000;               // Time in milliseconds the status are printed 
 unsigned long printPrevMillis = 0;                  // Store previous millis
 
+
 #define setClockPin D1  
 #define setReadPin  D2 
 #define setWritePin D8  
@@ -36,44 +37,58 @@ void loop() {
     if (Serial.available() > 0 ) {
           // read the incoming message fron serial monitor:
           serialMonitorInput = Serial.read();
-              
+
+         float temp_up = 38.5;
+         float temp_down = 33.5;
+    
               switch (serialMonitorInput) {
                   case '1':
-                        Balboa.writeButtonData = true; 
-                        Balboa.writeTempUp     = true;
+                        Balboa.writeDisplayData = true; 
+                        Balboa.writeTempUp      = true;
                         Serial.println("Write - Temp Up");
                         break; 
                   case '2':
-                        Balboa.writeButtonData = true;
-                        Balboa.writeTempDown   = true;  
+                        Balboa.writeDisplayData = true;
+                        Balboa.writeTempDown    = true;  
                         Serial.println("Write - Temp Down");
                         break; 
                   case '3':
-                        Balboa.writeButtonData = true;
-                        Balboa.writeMode       = true; 
+                        Balboa.writeDisplayData = true;
+                        Balboa.writeMode        = true; 
                         Serial.println("Write - Mode");
                         break;
                   case '4':
-                        Balboa.writeButtonData = true;
-                        Balboa.writeLight      = true; 
+                        Balboa.writeDisplayData = true;
+                        Balboa.writeLight       = true; 
                         Serial.println("Write - Light");
                         break;
                   case '5':
-                        Balboa.writeButtonData =  true;
-                        Balboa.writePump1      = true; 
+                        Balboa.writeDisplayData =  true;
+                        Balboa.writePump1       = true; 
                         Serial.println("Write - Pump 1");
                         break;
                   case '6':
-                        Balboa.writeButtonData = true;
-                        Balboa.writePump2      = true; 
+                        Balboa.writeDisplayData = true;
+                        Balboa.writePump2       = true; 
                         Serial.println("Write - Pump 2");
                         break;
                   case '7':
-                        Balboa.writeButtonData = true;
-                        Balboa.writePump3      = true; 
+                        Balboa.writeDisplayData = true;
+                        Balboa.writePump3       = true; 
                         Serial.println("Write - Pump 3");
                         break;  
-                    default:
+                   case '8':
+                        Balboa.updateTemperature(temp_up);
+                        Serial.print("update temp: ");
+                        Serial.println(temp_up);
+                        break;
+                  case '9':
+                        Balboa.updateTemperature(temp_down);
+                        Serial.print("update temp: ");
+                        Serial.println(temp_down);
+                        break;
+                
+                  default:
                       break;
            }
      }
