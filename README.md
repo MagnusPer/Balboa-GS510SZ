@@ -79,8 +79,11 @@ ToDo: voltage adjust the Arduino input to max 3.3V
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/extras/docs/Balboa_GS_Interface.jpg" width="1000">
 
 ## Software
-
-**version 1.0**<br /> Basic functionality to read and set status using a **Balboa_GS** developed library. Two examples are provided, first with simple read and set functionality and the second using MQTT for remote access.     
+### version 1.1 
+ - New function `updateTemperature` added to set a temperature value instead of "push" button x number of times
+ - Balboa_GS_MQTT sketch updated with [AsyncElegantOTA](https://github.com/ayushsharma82/AsyncElegantOTA)
+### version 1.0 
+- Basic functionality to read and set status using a **Balboa_GS** developed library. Two examples are provided, first with simple read and set functionality and the second using MQTT for remote access.
 
 ## References of great help!
 - https://github.com/NickB1/OpenSpa/blob/master/documents/Balboa/Balboa_Display_Measurements.pdf
