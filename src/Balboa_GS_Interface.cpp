@@ -337,7 +337,7 @@ String BalboaInterface::lockup_LCD_character(int LCD_character) {
           case B1011111: return "6";  break;
           case B1110000: return "7";  break;
           case B1111111: return "8";  break;
-          case B1111011: return "9";  break;
+		  case B1110011: return "9";  break;    
           case B1110111: return "A";  break;
        // case B0011111: return "B";  break;
           case B1001110: return "C";  break;
@@ -380,7 +380,7 @@ String BalboaInterface::lockup_LCD_character(int LCD_character) {
           case B0010101: return "n";  break;
           case B0011101: return "o";  break;
           case B1100111: return "p";  break;
-          case B1110011: return "q";  break;
+	  //  case B1110011: return "q";  break;
           case B0000101: return "r";  break;
        // case B1011011: return "s";  break;
           case B0001111: return "t";  break;
