@@ -3,6 +3,8 @@
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/extras/docs/balboa_GS510SZ.jpg" width="400"> <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/extras/docs/VL700S.jpg" width="400">
 
 ## Software
+### version 1.2 - DRAFT
+ - Updated a failure of the intepretation of "9" in `Balboa_GS_Interface.cpp`
 ### version 1.1 
  - New function `updateTemperature` added to set a temperature value instead of "push" button x number of times
  - Balboa_GS_MQTT sketch updated with [AsyncElegantOTA](https://github.com/ayushsharma82/AsyncElegantOTA)
