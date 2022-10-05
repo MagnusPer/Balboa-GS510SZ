@@ -82,10 +82,13 @@ C = 1001110(0) = 0x4E  (Chunk 4) <br />
 
 Since the display and controler unit hardware design is unknown an OR-gate is used to prevent damage if simultaneous HIGH/LOW levels from display and Arduino.
 
-ToDo: voltage adjust the Arduino input to max 3.3V
-
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/extras/docs/Balboa_GS_Interface.jpg" width="1000">
 
+## PCB fabrication
+
+<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/extras/PCB%20layout/PCB_3D_view.jpg" width="420"> <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/extras/PCB%20layout/PCB_2D_view.jpg" width="550">
+
+Gerber files located here: [PCB Balboa-GS510SZ](https://github.com/MagnusPer/Balboa-GS510SZ/tree/main/extras/PCB%20layout )
 
 ## References of great help!
 - https://github.com/NickB1/OpenSpa/blob/master/documents/Balboa/Balboa_Display_Measurements.pdf
