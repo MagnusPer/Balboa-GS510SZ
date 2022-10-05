@@ -82,7 +82,7 @@ C = 1001110(0) = 0x4E  (Chunk 4) <br />
 
 Since the display and controler unit hardware design is unknown an OR-gate is used to prevent damage if simultaneous HIGH/LOW levels from display and Arduino.
 
-<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/extras/docs/Balboa_GS_Interface.jpg" width="1000">
+<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/21b17a55e75071fe418b36abd5e508e649eb3a07/extras/docs/Balboa_GS_Interface.jpg" width="1000">
 
 ## PCB fabrication
 
