@@ -1,17 +1,16 @@
- /*
+  /*
  *    
  *    Main board: Wemos D1 mini - esp8266
  *  
- *    SPA display controller for Balboa system GS510SZ
+ *    SPA display controller for Balboa system GS510SZ 
  *    
  */
     
-#include <ESPAsyncTCP.h>                // https://github.com/me-no-dev/ESPAsyncTCP
-#include <ESPAsyncWebServer.h>          // https://github.com/me-no-dev/ESPAsyncWebServer
-#include <AsyncElegantOTA.h>            // https://github.com/ayushsharma82/AsyncElegantOTA
 
+#include <WiFiClient.h>
+#include <ESP8266WebServer.h>
+#include <ElegantOTA.h>                  // https://github.com/ayushsharma82/ElegantOTA
 #include <ESP8266WiFi.h>  
-
 #include <PubSubClient.h>               // https://github.com/knolleary/pubsubclient
 #include <Balboa_GS_Interface.h>        // https://github.com/MagnusPer/Balboa-GS510SZ    
 
@@ -21,13 +20,13 @@
 
 
 //Constants
-const char *wifi_ssid                    = "";                   // WiFi SSID
-const char *wifi_pwd                     = "";                   // WiFi Password 
+const char *wifi_ssid                    = "";          // WiFi SSID
+const char *wifi_pwd                     = "";          // WiFi Password 
 const char *wifi_hostname                = "SPA";
-const char* mqtt_server                  = "";                   // MQTT Boker IP, your home MQTT server eg Mosquitto on RPi, or some public MQTT
-const int mqtt_port                      = 1883;                 // MQTT Broker PORT, default is 1883 but can be anything.
-const char *mqtt_user                    = "";                   // MQTT Broker User Name
-const char *mqtt_pwd                     = "";                   // MQTT Broker Password 
+const char* mqtt_server                  = "";           // MQTT Boker IP, your home MQTT server eg Mosquitto on RPi, or some public MQTT
+const int mqtt_port                      = 1883;        // MQTT Broker PORT, default is 1883 but can be anything.
+const char *mqtt_user                    = "";          // MQTT Broker User Name
+const char *mqtt_pwd                     = "";          // MQTT Broker Password 
 String clientId                          = "SPA : " + String(ESP.getChipId(), HEX);
 
 //Globals 
@@ -52,25 +51,26 @@ const char* mqtt_Subscribe_updateTemp_topic = "SPA/UpdateTemp";
 WiFiClient espClient;                                           // Setup WiFi client definition WiFi
 PubSubClient client(espClient);                                 // Setup MQTT client
 BalboaInterface Balboa(setClockPin, setReadPin, setWritePin);   // Setup Balboa interface 
-AsyncWebServer server(80);
+ESP8266WebServer server(80);
 
+ 
 /**************************************************************************/
 /* Setup                                                                  */
 /**************************************************************************/
 
 void setup() {
   
-  if (debug) { Serial.begin(115200); Serial.println("Welcome to SPA - Balboa system GS510SZ"); }
+  if (debug) { Serial.begin(115200); Serial.println("Welcome to SPA - Balboa system GS510SZ");}
   setup_wifi();
   client.setCallback(callback);
   Serial.begin(115200);
   Balboa.begin();
 
-  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
-    request->send(200, "text/plain", "Hi! This is a sample response.");
+  server.on("/", []() {
+    server.send(200, "text/plain", "Hi! I am ESP8266.");
   });
   
-  AsyncElegantOTA.begin(&server);    // Start AsyncElegantOTA
+  ElegantOTA.begin(&server);    // Start ElegantOTA
   server.begin();
   if (debug) { Serial.println("HTTP server started"); }
 
@@ -90,26 +90,27 @@ void setup_wifi() {
         WL_CONNECTED        = 3,
         WL_CONNECT_FAILED   = 4,
         WL_CONNECTION_LOST  = 5,
-        WL_DISCONNECTED     = 6 */
+        WL_WRONG_PASSWORD   = 6,
+        WL_DISCONNECTED     = 7 */
   
     if (debug){ Serial.print("WiFi.status(): "); Serial.println(WiFi.status()); }
     
     int WiFi_retry_counter = 0;
-   
+    WiFi.mode(WIFI_STA);
     WiFi.hostname(wifi_hostname);
     WiFi.setSleepMode(WIFI_NONE_SLEEP);
-    WiFi.mode(WIFI_STA);
     WiFi.begin(wifi_ssid, wifi_pwd);
     
     // Loop until reconnected or max retry then restart
     while (WiFi.status() != WL_CONNECTED){
         WiFi_retry_counter ++;
         if (WiFi_retry_counter == 30) {ESP.restart();}  
-        if (debug){ Serial.print("WiFi retry: "); Serial.println(WiFi_retry_counter); } 
+        if (debug){ Serial.print("WiFi.status(): "); Serial.print(WiFi.status()); 
+                    Serial.print("   WiFi retry: "); Serial.println(WiFi_retry_counter); } 
         delay(1000);
     }
     
-    if (debug){ Serial.print("WiFi connected: ");Serial.println(WiFi.localIP()); }
+    if (debug){ Serial.print("WiFi connected: ");Serial.println(WiFi.localIP());}
 
 }
 
@@ -125,14 +126,14 @@ void reconnect() {
     // Loop until reconnected or max retry then leave
     while (!client.connected() && MQTT_retry_counter < 30) {
        client.setServer(mqtt_server, mqtt_port);
-       if (debug){ Serial.print("Connecting to MQTT server "); Serial.println(MQTT_retry_counter); }
+       if (debug){ Serial.print("Connecting to MQTT server, retry: "); Serial.println(MQTT_retry_counter); }
        client.setServer(mqtt_server, mqtt_port);
        client.connect(clientId.c_str(), mqtt_user, mqtt_pwd);
        MQTT_retry_counter ++;
        delay (1000);
     }
     
-    if (debug && client.connected()){ Serial.println(" MQTT connected"); }
+    if (debug && client.connected()){ Serial.println("MQTT connected"); }
 
     client.subscribe(mqtt_Subscribe_write_topic);
     client.subscribe(mqtt_Subscribe_updateTemp_topic);
@@ -147,9 +148,9 @@ void reconnect() {
 
 void loop() {
 
- // ArduinoOTA.handle();
 	Balboa.loop();
   client.loop();
+  server.handleClient();
   
   if (WiFi.status() != WL_CONNECTED){ setup_wifi(); }             // Check WiFi connnection reconnect otherwise 
   if (!client.connected()) { reconnect(); }                       // Check MQTT connnection reconnect otherwise 
@@ -192,34 +193,42 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
       if ( s_topic == mqtt_Subscribe_write_topic ) {
          
-              if (s_payload == "TempUp") {
+             if (s_payload == "TempUp") {
                   Balboa.writeDisplayData = true; 
                   Balboa.writeTempUp      = true;
-              }
-              else if (s_payload == "TempDown") {
+             }
+             else if (s_payload == "TempDown") {
                   Balboa.writeDisplayData = true;
                   Balboa.writeTempDown    = true;  
-              }
-              else if (s_payload == "Light") {
+             }
+             else if (s_payload == "Light") {
                   Balboa.writeDisplayData = true;
                   Balboa.writeLight       = true; 
-              }
-              else if (s_payload == "Pump1") {
+             }
+             else if (s_payload == "Pump1") {
                   Balboa.writeDisplayData = true;
                   Balboa.writePump1       = true;  
-              }
-              else if (s_payload == "Pump2") {
+             }
+             else if (s_payload == "Pump2") {
                   Balboa.writeDisplayData = true;
                   Balboa.writePump2       = true;  
-              }
-              else if (s_payload == "Pump3") {
+             }
+             else if (s_payload == "Pump3") {
                   Balboa.writeDisplayData = true;
                   Balboa.writePump3       = true;  
-              }
-              else if (s_payload == "Mode") {
+             }
+             else if (s_payload == "Mode") {
                   Balboa.writeDisplayData = true;
                   Balboa.writeMode        = true;  
              }
+             else if (s_payload == "Stop") {
+                  Balboa.stop();
+             }
+             else if (s_payload == "Reset") {
+                ESP.restart();
+             }
+             
+           
       }
 
       if ( s_topic == mqtt_Subscribe_updateTemp_topic) {
