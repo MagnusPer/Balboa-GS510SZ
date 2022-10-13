@@ -5,6 +5,8 @@
 ## Software
 ### version 1.2 - In Work
  - Updated a failure of the intepretation of "9" in `Balboa_GS_Interface.cpp`
+ - Changed to [ElegantOTA](https://github.com/ayushsharma82/ElegantOTA)
+ - Added `Stop` and `Reset` MQTT interface in `Balboa_GS_MQTT.ino` 
 ### version 1.1 
  - New function `updateTemperature` added to set a temperature value instead of "push" button x number of times
  - Balboa_GS_MQTT sketch updated with [AsyncElegantOTA](https://github.com/ayushsharma82/AsyncElegantOTA)
