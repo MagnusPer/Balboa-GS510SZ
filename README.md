@@ -96,3 +96,6 @@ Gerber files located here: [PCB Balboa-GS510SZ](https://github.com/MagnusPer/Bal
 - https://github.com/NickB1/OpenSpa/blob/master/documents/Balboa/Balboa_Display_Measurements.pdf
 - https://www.olivierhill.ca/archives/72-The-Internet-of-Spas.html
 - https://create.arduino.cc/projecthub/meljr/7-segment-led-displays-102-using-a-shift-register-6b6976
+
+## Other Balboa projects 
+- GL2000 Series https://github.com/netmindz/balboa_GL_ML_spa_control
