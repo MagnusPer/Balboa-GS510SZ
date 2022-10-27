@@ -99,3 +99,4 @@ Gerber files located here: [PCB Balboa-GS510SZ](https://github.com/MagnusPer/Bal
 
 ## Other Balboa projects 
 - GL2000 Series https://github.com/netmindz/balboa_GL_ML_spa_control
+- BP Series https://github.com/ccutrer/balboa_worldwide_app
