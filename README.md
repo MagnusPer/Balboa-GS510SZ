@@ -3,7 +3,7 @@
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/extras/docs/balboa_GS510SZ.jpg" width="400"> <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/extras/docs/VL700S.jpg" width="400">
 
 ## Software
-### version 1.2 - In Work
+### version 1.2
  - Updated a failure of the intepretation of "9" in `Balboa_GS_Interface.cpp`
  - Changed to [ElegantOTA](https://github.com/ayushsharma82/ElegantOTA) in `Balboa_GS_MQTT.ino` 
  - Added `Stop` and `Reset` MQTT interface in `Balboa_GS_MQTT.ino` 
