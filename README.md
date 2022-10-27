@@ -88,7 +88,7 @@ Since the display and controler unit hardware design is unknown an OR-gate is us
 
 ## PCB fabrication
 
-<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/extras/PCB%20layout/PCB_3D_view.jpg" width="400"> <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/extras/PCB%20layout/PCB_2D_view.jpg" width="500">
+<img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/extras/PCB%20layout/PCB_3D_view.jpg" width="350"> <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/extras/PCB%20layout/PCB_2D_view.jpg" width="400">
 
 Gerber files located here: [PCB Balboa-GS510SZ](https://github.com/MagnusPer/Balboa-GS510SZ/tree/main/extras/PCB%20layout )
 
