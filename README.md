@@ -44,7 +44,7 @@ PWM output from control system, same on both pins. Unclear functionality for the
 </p>
 
 #### Conclusion
-- The clock is pulsing 7 times for each chunck of display data, totaly 39 bits och 3 times for button data. A complete cycle 42 pulses. <br />
+- The clock is pulsing 7 times for each chunck of display data, totaly 39 bits and 3 times for button data. A complete cycle 42 pulses. <br />
 - Totaly of 6 display data chunks in each cycle <br />
 - Each cycle is repeted every 20 ms <br />
 - One total cycle duration 1.88 ms
