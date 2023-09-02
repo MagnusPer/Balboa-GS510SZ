@@ -19,10 +19,15 @@
 #include <ArduinoHA.h>
 #include <Balboa_GS_Interface.h>        // https://github.com/MagnusPer/Balboa-GS510SZ    
 
+#ifdef ESP32
+#define setClockPin 1 // CHANGE ME
+#define setReadPin  1 // CHANGE ME
+#define setWritePin 1 // CHANGE ME 
+#else
 #define setClockPin D1  
 #define setReadPin  D2 
 #define setWritePin D8  
-
+#endif
 
 //Constants
 const char *wifi_ssid                    = "";          // WiFi SSID
@@ -32,7 +37,6 @@ const char* mqtt_server                  = "";           // MQTT Boker IP, your 
 const int mqtt_port                      = 1883;        // MQTT Broker PORT, default is 1883 but can be anything.
 const char *mqtt_user                    = "";          // MQTT Broker User Name
 const char *mqtt_pwd                     = "";          // MQTT Broker Password 
-String clientId                          = "SPA : " + String(ESP.getChipId(), HEX);
 
 //Globals 
 bool debug                               = true;    // If true activate debug values to write to serial port
@@ -110,7 +114,11 @@ void setup_wifi() {
     int WiFi_retry_counter = 0;
     WiFi.mode(WIFI_STA);
     WiFi.hostname(wifi_hostname);
+    #ifdef ESP32
+    WiFi.setSleep(false);
+    #else
     WiFi.setSleepMode(WIFI_NONE_SLEEP);
+    #endif
     WiFi.begin(wifi_ssid, wifi_pwd);
     
     // Loop until reconnected or max retry then restart
