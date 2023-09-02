@@ -68,6 +68,9 @@ HABinarySensor heater("Heater");
 HABinarySensor pump1("Pump1");
 HABinarySensor pump2("Pump2");
 HABinarySensor lights("Lights");
+HAButton pump1Button("Pump1");
+HAButton pump2Button("Pump2");
+HAButton lightsButton("Lights");
 
  
 /**************************************************************************/
@@ -137,13 +140,29 @@ void setup_wifi() {
 
 void setup_HA() {
     device.setName("Hottub");
-    device.setSoftwareVersion("0.0.1");
+    device.setSoftwareVersion("1.2");
     device.setManufacturer("Balboa");
     device.setModel("GS510SZ");
 
     waterTemp.setUnitOfMeasurement("°C");
     waterTemp.setDeviceClass("temperature");
     waterTemp.setName("Water temperature");
+
+    display.setName("Display");
+    heater.setName("Heater");
+
+    pump1.setName("Pump1");
+    pump1Button.setName("Pump1");
+    pump1Button.onCommand(onButtonPress);
+
+    pump2.setName("Pump2");
+    pump2Button.setName("Pump2");
+    pump2Button.onCommand(onButtonPress);
+
+    lights.setName("Lights");
+    lightsButton.setName("Lights");
+    lightsButton.onCommand(onButtonPress);
+
 
     mqtt.begin(mqtt_server, mqtt_user, mqtt_pwd);
 
@@ -179,21 +198,13 @@ void loop() {
 /* Subscribe to MQTT topic                                                */
 /**************************************************************************/
 
-void callback(char* topic, byte* payload, unsigned int length) {
-
-      char c_payload[length];
-      memcpy(c_payload, payload, length);
-      c_payload[length] = '\0';
-  
-      String s_topic = String(topic);
-      String s_payload = String(c_payload);
+void onButtonPress(HAButton* sender) {
   
     // Handling incoming messages
 
-    Serial.println(s_topic);
-    Serial.println(s_payload);
+    Serial.println(sender->getName());
 
-      if ( s_topic == mqtt_Subscribe_write_topic ) {
+    String s_payload = sender->getName();
          
              if (s_payload == "TempUp") {
                   Balboa.writeDisplayData = true; 
@@ -231,12 +242,11 @@ void callback(char* topic, byte* payload, unsigned int length) {
              }
              
            
-      }
 
-      if ( s_topic == mqtt_Subscribe_updateTemp_topic) {
+      // if ( s_topic == mqtt_Subscribe_updateTemp_topic) {
         
-            Balboa.updateTemperature(s_payload.toFloat());
-      }
+      //       Balboa.updateTemperature(s_payload.toFloat());
+      // }
 
       
 }
