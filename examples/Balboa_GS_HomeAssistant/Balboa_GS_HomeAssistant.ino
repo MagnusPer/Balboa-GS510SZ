@@ -44,13 +44,6 @@ byte mac[] = {0x00, 0x10, 0xFA, 0x6E, 0x32, 0x4A};  // Leave this value, unless 
 
 
 // MQTT Constants
-const char* mqtt_Display_topic              = "SPA/Display";
-const char* mqtt_SetTemp_topic              = "SPA/SetTemp";
-const char* mqtt_WaterTemp_topic            = "SPA/WaterTemp";
-const char* mqtt_Heater_topic               = "SPA/Heater";
-const char* mqtt_Pump1_topic                = "SPA/Pump1";
-const char* mqtt_Pump2_topic                = "SPA/Pump2";
-const char* mqtt_Lights_topic               = "SPA/Lights";
 const char* mqtt_Subscribe_write_topic      = "SPA/Write"; 
 const char* mqtt_Subscribe_updateTemp_topic = "SPA/UpdateTemp";
 
