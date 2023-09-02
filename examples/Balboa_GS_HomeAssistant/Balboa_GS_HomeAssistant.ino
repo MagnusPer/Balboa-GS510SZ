@@ -40,7 +40,7 @@ bool debug                               = true;    // If true activate debug va
 const unsigned long ReportTimerMillis    = 30000;   // Timer in milliseconds to report mqtt topics 
 unsigned long ReportTimerPrevMillis      = 0;       // Store previous millis
 
-byte mac[] = {0x00, 0x10, 0xFA, 0x6E, 0x38, 0x4A};  // Leave this value, unless you own multiple hot tubs
+byte mac[] = {0x00, 0x10, 0xFA, 0x6E, 0x32, 0x4A};  // Leave this value, unless you own multiple hot tubs
 
 
 // MQTT Constants
@@ -60,10 +60,17 @@ HADevice device(mac, sizeof(mac));
 HAMqtt mqtt(espClient, device, 30);
 BalboaInterface Balboa(setClockPin, setReadPin, setWritePin);   // Setup Balboa interface 
 #ifdef ESP32
-WebServer webserver(80);
+WebServer server(80);
 #else
-ESP8266WebServer webserver(80);
+ESP8266WebServer server(80);
 #endif
+
+HASensor display("Display");
+HASensorNumber waterTemp("waterTemp", HANumber::PrecisionP1);
+HABinarySensor heater("Heater");
+HABinarySensor pump1("Pump1");
+HABinarySensor pump2("Pump2");
+HABinarySensor lights("Lights");
 
  
 /**************************************************************************/
@@ -131,9 +138,13 @@ void setup_HA() {
     device.setName("Hottub");
     device.setSoftwareVersion("0.0.1");
     device.setManufacturer("Balboa");
-    device.setModel("GS");
+    device.setModel("GS510SZ");
 
-    mqtt.begin(BROKER_ADDR, BROKER_USERNAME, BROKER_PASSWORD);
+    waterTemp.setUnitOfMeasurement("°C");
+    waterTemp.setDeviceClass("temperature");
+    waterTemp.setName("Water temperature");
+
+    mqtt.begin(mqtt_server, mqtt_user, mqtt_pwd);
 
 }
 
@@ -148,22 +159,17 @@ void loop() {
   server.handleClient();
   
   if (WiFi.status() != WL_CONNECTED){ setup_wifi(); }             // Check WiFi connnection reconnect otherwise 
-  if (!client.connected()) { reconnect(); }                       // Check MQTT connnection reconnect otherwise 
-
-
  
     if(millis() - ReportTimerPrevMillis  > ReportTimerMillis) {
     
           ReportTimerPrevMillis = millis();
           
-          client.publish(mqtt_Display_topic, String(Balboa.LCD_display).c_str());
-          client.publish(mqtt_SetTemp_topic, String(Balboa.setTemperature).c_str());
-          client.publish(mqtt_WaterTemp_topic, String(Balboa.waterTemperature).c_str());
-          client.publish(mqtt_Heater_topic, String(Balboa.displayHeater).c_str());
-          client.publish(mqtt_Pump1_topic , String(Balboa.displayPump1).c_str());
-          client.publish(mqtt_Pump2_topic , String(Balboa.displayPump2).c_str());
-          client.publish(mqtt_Lights_topic , String(Balboa.displayLight).c_str());
-   
+          display.setValue(Balboa.LCD_display.c_str());
+          waterTemp.setValue(Balboa.waterTemperature);
+          heater.setState(Balboa.displayHeater);
+          pump1.setState(Balboa.displayPump1);
+          pump2.setState(Balboa.displayPump2);
+          lights.setState(Balboa.displayLight);   
     } 
      
 }
