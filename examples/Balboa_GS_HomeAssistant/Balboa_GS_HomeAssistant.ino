@@ -8,10 +8,15 @@
     
 
 #include <WiFiClient.h>
+#ifdef ESP32
+#include <WebServer.h>
+#include <WiFi.h>
+#else
 #include <ESP8266WebServer.h>
-#include <ElegantOTA.h>                  // https://github.com/ayushsharma82/ElegantOTA
 #include <ESP8266WiFi.h>  
-#include <PubSubClient.h>               // https://github.com/knolleary/pubsubclient
+#endif
+#include <ElegantOTA.h>                  // https://github.com/ayushsharma82/ElegantOTA
+#include <ArduinoHA.h>
 #include <Balboa_GS_Interface.h>        // https://github.com/MagnusPer/Balboa-GS510SZ    
 
 #define setClockPin D1  
@@ -35,6 +40,8 @@ bool debug                               = true;    // If true activate debug va
 const unsigned long ReportTimerMillis    = 30000;   // Timer in milliseconds to report mqtt topics 
 unsigned long ReportTimerPrevMillis      = 0;       // Store previous millis
 
+byte mac[] = {0x00, 0x10, 0xFA, 0x6E, 0x38, 0x4A};  // Leave this value, unless you own multiple hot tubs
+
 
 // MQTT Constants
 const char* mqtt_Display_topic              = "SPA/Display";
@@ -49,9 +56,14 @@ const char* mqtt_Subscribe_updateTemp_topic = "SPA/UpdateTemp";
 
 //Initialize components
 WiFiClient espClient;                                           // Setup WiFi client definition WiFi
-PubSubClient client(espClient);                                 // Setup MQTT client
+HADevice device(mac, sizeof(mac));
+HAMqtt mqtt(espClient, device, 30);
 BalboaInterface Balboa(setClockPin, setReadPin, setWritePin);   // Setup Balboa interface 
-ESP8266WebServer server(80);
+#ifdef ESP32
+WebServer webserver(80);
+#else
+ESP8266WebServer webserver(80);
+#endif
 
  
 /**************************************************************************/
@@ -62,7 +74,7 @@ void setup() {
   
   if (debug) { Serial.begin(115200); Serial.println("Welcome to SPA - Balboa system GS510SZ");}
   setup_wifi();
-  client.setCallback(callback);
+  setup_HA();
   Serial.begin(115200);
   Balboa.begin();
 
@@ -115,32 +127,15 @@ void setup_wifi() {
 }
 
 
-/**************************************************************************/
-/* Setup MQTT connection                                                   */
-/**************************************************************************/
+void setup_HA() {
+    device.setName("Hottub");
+    device.setSoftwareVersion("0.0.1");
+    device.setManufacturer("Balboa");
+    device.setModel("GS");
 
-void reconnect() {
+    mqtt.begin(BROKER_ADDR, BROKER_USERNAME, BROKER_PASSWORD);
 
-    int MQTT_retry_counter = 0;
-    
-    // Loop until reconnected or max retry then leave
-    while (!client.connected() && MQTT_retry_counter < 30) {
-       client.setServer(mqtt_server, mqtt_port);
-       if (debug){ Serial.print("Connecting to MQTT server, retry: "); Serial.println(MQTT_retry_counter); }
-       client.setServer(mqtt_server, mqtt_port);
-       client.connect(clientId.c_str(), mqtt_user, mqtt_pwd);
-       MQTT_retry_counter ++;
-       delay (1000);
-    }
-    
-    if (debug && client.connected()){ Serial.println("MQTT connected"); }
-
-    client.subscribe(mqtt_Subscribe_write_topic);
-    client.subscribe(mqtt_Subscribe_updateTemp_topic);
-   
-    
 }
-
 
 /**************************************************************************/
 /* Main loop                                                              */
@@ -149,7 +144,7 @@ void reconnect() {
 void loop() {
 
 	Balboa.loop();
-  client.loop();
+  mqtt.loop();
   server.handleClient();
   
   if (WiFi.status() != WL_CONNECTED){ setup_wifi(); }             // Check WiFi connnection reconnect otherwise 
