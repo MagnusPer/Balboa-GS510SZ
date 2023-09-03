@@ -3,6 +3,9 @@
 <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/extras/docs/balboa_GS510SZ.jpg" width="400"> <img src="https://github.com/MagnusPer/Balboa-GS510SZ/blob/main/extras/docs/VL700S.jpg" width="400">
 
 ## Software
+### version 1.3
+ - New example sketch for Home Assistant users, thank you [netmindz](https://github.com/netmindz)   
+
 ### version 1.2
  - Updated a failure of the intepretation of "9" in `Balboa_GS_Interface.cpp`
  - Changed to [ElegantOTA](https://github.com/ayushsharma82/ElegantOTA) in `Balboa_GS_MQTT.ino` 
