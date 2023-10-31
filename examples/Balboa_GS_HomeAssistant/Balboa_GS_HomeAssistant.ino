@@ -67,10 +67,31 @@ HASensorNumber waterTemp("waterTemp", HANumber::PrecisionP1);
 HABinarySensor heater("Heater");
 HABinarySensor pump1("Pump1");
 HABinarySensor pump2("Pump2");
+HABinarySensor pump3("Pump3");
 HABinarySensor lights("Lights");
 HAButton pump1Button("Pump1");
 HAButton pump2Button("Pump2");
+HAButton pump3Button("Pump3");
 HAButton lightsButton("Lights");
+HAButton tempUpButton("TempUp");
+HAButton tempDownButton("TempDown");
+HAButton modeButton("Mode");
+
+HAHVAC hvac(
+  "temp",
+  HAHVAC::TargetTemperatureFeature
+);
+
+void onTargetTemperatureCommand(HANumeric temperature, HAHVAC* sender) {
+    float temperatureFloat = temperature.toFloat();
+
+    Serial.print("Target temperature: ");
+    Serial.println(temperatureFloat);
+
+    Balboa.updateTemperature(temperatureFloat);
+
+    sender->setTargetTemperature(temperature); // report target temperature back to the HA panel
+}
 
  
 /**************************************************************************/
@@ -159,10 +180,30 @@ void setup_HA() {
     pump2Button.setName("Pump2");
     pump2Button.onCommand(onButtonPress);
 
+    pump3.setName("Pump3");
+    pump3Button.setName("Pump3");
+    pump3Button.onCommand(onButtonPress);
+
     lights.setName("Lights");
     lightsButton.setName("Lights");
     lightsButton.onCommand(onButtonPress);
 
+
+    tempUpButton.setName("Temp Up");
+    tempUpButton.onCommand(onButtonPress);
+
+    tempDownButton.setName("Temp Down");
+    tempDownButton.onCommand(onButtonPress);
+
+    modeButton.setName("Mode");
+    modeButton.onCommand(onButtonPress);
+
+
+    // configure HVAC (optional)
+    hvac.setName("Temp");
+    hvac.setMinTemp(20);
+    hvac.setMaxTemp(40);
+    hvac.setTempStep(0.5);
 
     mqtt.begin(mqtt_server, mqtt_user, mqtt_pwd);
 
@@ -189,7 +230,9 @@ void loop() {
           heater.setState(Balboa.displayHeater);
           pump1.setState(Balboa.displayPump1);
           pump2.setState(Balboa.displayPump2);
-          lights.setState(Balboa.displayLight);   
+          // pump3.setState(Balboa.displayPump3);
+          lights.setState(Balboa.displayLight);
+          hvac.setCurrentTargetTemperature(Balboa.waterTemperature);
     } 
      
 }
@@ -240,14 +283,6 @@ void onButtonPress(HAButton* sender) {
              else if (s_payload == "Reset") {
                 ESP.restart();
              }
-             
-           
-
-      // if ( s_topic == mqtt_Subscribe_updateTemp_topic) {
-        
-      //       Balboa.updateTemperature(s_payload.toFloat());
-      // }
-
       
 }
       
