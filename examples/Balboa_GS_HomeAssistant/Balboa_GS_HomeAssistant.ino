@@ -249,15 +249,15 @@ void onButtonPress(HAButton* sender) {
 
     String s_payload = sender->getName();
          
-             if (s_payload == "TempUp") {
+             if (s_payload == "Temp Up") {
                   Balboa.writeDisplayData = true; 
                   Balboa.writeTempUp      = true;
              }
-             else if (s_payload == "TempDown") {
+             else if (s_payload == "Temp Down") {
                   Balboa.writeDisplayData = true;
                   Balboa.writeTempDown    = true;  
              }
-             else if (s_payload == "Light") {
+             else if (s_payload == "Lights") {
                   Balboa.writeDisplayData = true;
                   Balboa.writeLight       = true; 
              }
